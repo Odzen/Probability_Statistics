@@ -3,8 +3,6 @@ install.packages("readr")
 install.packages('jtools')
 install.packages('tidyverse')
 
-
-
 # cargar paquete readr
 library("readr")
 
@@ -16,6 +14,10 @@ data <- read_csv('Reporte_Delito_Violencia_Intrafamiliar_Polic_a_Nacional.csv')
 # mirar datos
 head(data)
 
+
+##---------------------------------------------------------------------------
+##---------------------------------------------------------------------------
+##---------------------------------------------------------------------------
 ##Formatear data solo por año y luego agrego nueva columna de solo año
 ##Usando mutate, format y group_by
 ##---------------------------------------------
@@ -32,73 +34,20 @@ dataFormat<-na.omit(dataFormat)
 dataFormat<-transform(dataFormat,YEAR = as.numeric(YEAR))
 
 
-#DECLARACION de Variables para posterior uso en graficos
-#-----------------------------------------------------------------
-#Numero de victimas totales
-numeroDeVicitmasTotales<-sum(dataFormat$CANTIDAD, na.rm = TRUE)
-numeroDeVicitmasTotales
-
-#Frecuencias---------------------------------------
-##Data frame en donde pongo la frecuencia absoluta por genero 
-frecuenciasAbsolutasGenero<-aggregate(dataFormat$GENERO,by=list(dataFormat$GENERO),FUN=length)
-colnames(frecuenciasAbsolutasGenero) <- c("GENERO", "CANTIDAD")
-frecuenciasAbsolutasGenero
-
-# Transpongo todas las columnas menos la primera, por facilidad 
-frecAbsolutGeneroTransp <- data.frame(t(frecuenciasAbsolutasGenero[-1]))
-colnames(frecAbsolutGeneroTransp) <- frecuenciasAbsolutasGenero[, 1]
-frecAbsolutGeneroTransp
-#Numero de casos donde las victimas son mujeres
-frecAbsolutGeneroTransp$FEMENINO
-
-#Numero de casos donde las victimas son hombres
-frecAbsolutGeneroTransp$MASCULINO
-
-#Numero de casos donde el genero de las victimas no es reportado 
-frecAbsolutGeneroTransp$`NO REPORTA`
-
-#DATAFRAME PARA EL GRAFICO 1 DE SERIE DE TIEMPO
-#--------------------------------------------
-##Este dataframe me saca el numero total de victimas por año
-dataGraphic1 <- dataFormat %>% 
-  group_by(YEAR,GENERO) %>% 
-  summarise(CANTIDAD = sum(CANTIDAD))
-#aggregate(dataFormat$CANTIDAD,by=list(dataFormat$CANTIDAD),FUN=sum)
-
-
-
-##Numero total de victimas
-sum(dataGraphic1$CANTIDAD)
-
-
-##Frecuencias por genero
-##--------------------------------------
-#Frecuencias relativas (proporciones)
-round((prop.table(tablaFAbsoluta)*100),2)
-
-#Frecuencia Absoluta
-tablaFAbsoluta<-table(data$GENERO)
-tablaFAbsoluta
-
-##Operaciones con generos
-##---------------------------------------------
-
-#fILTRO TABLA DE VICITMAS MASCULINAS
-#dataMasculino<-data[data$GENERO == "MASCULINO",]
-
-#fILTRO TABLA DE VICITMAS FEMENINAS
-#dataFemenino<-data[data$GENERO == "FEMENINO",]
-
-
-
-
 ##---------------------------------------------------------------------------
 ##---------------------------------------------------------------------------
 ###GRAFICAS
 ##---------------------------------------------------------------------------
-##Gráfico 1 - Serie de Tiempo 
+##Gráfico 1 - Serie de Tiempo #--------------------------------------------
+##Este dataframe me saca el numero total de victimas por año
+dataGraphic1 <- dataFormat %>% 
+  group_by(YEAR,GENERO) %>% 
+  summarise(CANTIDAD = sum(CANTIDAD))
 
+##Numero total de victimas
+sum(dataGraphic1$CANTIDAD)
 
+#Grafico
 dataGraphic1 %>% ggplot(aes(YEAR,CANTIDAD, color=factor(GENERO)))+geom_line()+
   theme_classic() +
   labs(
@@ -216,20 +165,13 @@ dataFormatMenor<-dataFormat[dataFormat$GRUPO.ETARIO=="MENORES",]
 dataGraphic5 <- dataFormatMenor %>% 
   group_by(ARMAS.MEDIOS,GENERO) %>% 
   summarise(CANTIDAD = sum(CANTIDAD))
-#dataGraphic5<-aggregate(dataFormatMujer$MUNICIPIO,by=list(dataFormatMujer$MUNICIPIO),FUN=length)
-#colnames(dataGraphic5) <- c("MUNICIPIO", "GENERO", "VICTIMAS")
-
 
 ##Elimino casos no reportados, solo estudiamos casos donde reportan el arma y el genero
 dataGraphic5<-dataGraphic5[dataGraphic5$ARMAS.MEDIOS!="NO REPORTA",]
 dataGraphic5<-dataGraphic5[dataGraphic5$GENERO!="NO REPORTA",]
 dataGraphic5<-dataGraphic5[dataGraphic5$ARMAS.MEDIOS!="NO REPORTADO",]
-#Ordenar por número de victimas
-#dataGraphic5 <- dataGraphic5[order(-dataGraphic5$CANTIDAD), ]
 
-#Saco primeras 5 ciudades con head
-#dataGraphic5<-head(dataGraphic5)
-
+#Grafico
 ggplot(dataGraphic5, aes(x=GENERO, y=CANTIDAD)) + geom_bar(stat="identity", )  + coord_flip() + facet_wrap(~ ARMAS.MEDIOS)
 
 
