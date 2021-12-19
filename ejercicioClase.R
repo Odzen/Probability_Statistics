@@ -1,6 +1,6 @@
-coin<-c('head', 'tail')
+coin<-c('head', 'tail', 'head')
 
-set.seed(546378)# Semilla para repoducibilidad, ya que es una operacion aleatoria
+set.seed(546378)# Semilla para reproducibilidad, ya que es una operacion aleatoria
 
 #Crear vector vacio donde guardare posteriormente los resultados de cada lanzamiento
 vectorFlips <- character() 
@@ -20,7 +20,6 @@ for(numberFlip in 1:1000){
   print(flip)
   #Guardo el valor en vectorFlips
   vectorFlips<-append(vectorFlips,numberFlip)
-  #Asigno P(A)=0
   #Calculo la frecuencia, si me sale el valor que estoy buscando p=1 y si no p=0
   #Luego lo guardo en el vector relativeFrequencyVector
   if(flip=='head'){
@@ -34,7 +33,7 @@ for(numberFlip in 1:1000){
 
 #Representar todo con un grafico de dispersion para ver el comportamiento
 plot(x=vectorFlips,y=relativeFrequencyVector,xlab = "Number of flips", ylab = "Relative frequency")
-abline(h=0.5,col="blue",lty=1)
+abline(h=0.66,col="blue",lty=1)
 
 #Test 3
 #print(vectorFlips)
