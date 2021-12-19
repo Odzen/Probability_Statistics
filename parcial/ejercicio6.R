@@ -1,3 +1,17 @@
+
+##---------------------------------------------------------------------------
+##---------------------------------------------------------------------------
+##---------------------------------------------------------------------------
+## Creado por Juan Sebastian Velasquez Acevedo
+## Codigo: 1744936-3743
+## Parcial de Estadística - Ejercicio 2
+## Universidad del Valle - Cali - Colombia -Periodo Nov-Mar
+## Correo: juan.velasquez.acevedo@correounivalle.edu.co
+##---------------------------------------------
+## Last modification: Dic 19
+
+
+
 # instalar paquete readr
 install.packages("readr")
 install.packages('jtools')
