@@ -63,7 +63,7 @@ frecAbsolutGeneroTransp$`NO REPORTA`
 dataGraphic1 <- dataFormat %>% 
   group_by(YEAR,GENERO) %>% 
   summarise(CANTIDAD = sum(CANTIDAD))
-  #aggregate(dataFormat$CANTIDAD,by=list(dataFormat$CANTIDAD),FUN=sum)
+#aggregate(dataFormat$CANTIDAD,by=list(dataFormat$CANTIDAD),FUN=sum)
 
 
 
@@ -92,6 +92,8 @@ tablaFAbsoluta
 
 
 
+##---------------------------------------------------------------------------
+##---------------------------------------------------------------------------
 ###GRAFICAS
 ##---------------------------------------------------------------------------
 ##Gráfico 1 - Serie de Tiempo 
@@ -108,6 +110,8 @@ dataGraphic1 %>% ggplot(aes(YEAR,CANTIDAD, color=factor(GENERO)))+geom_line()+
     )
   )
 
+##---------------------------------------------------------------------------
+##---------------------------------------------------------------------------
 ##---------------------------------------------------------------------------
 ##Gráfico 2 - Grafico de barras
 
@@ -139,8 +143,38 @@ ggplot(data=dataGraphic2, aes(x=DEPARTAMENTO, y=PORCENTAJE, fill=ARMAS.MEDIOS)) 
       "Porcentaje de victimas afectadas por una determinada arma en el Valle"
     )
   )
+
 ##---------------------------------------------------------------------------
-##Gráfico 3  - Barras Apiladas
+##---------------------------------------------------------------------------
+##---------------------------------------------------------------------------
+##Gráfico 3  - Cajas
+##Solo en el 2021
+
+##Formateo tabla para mostrar los últimos 3 años, 2019, 2020 y 2021
+dataFormat2021<-dataFormat[dataFormat$YEAR>2018,]
+
+
+##Defino DataFrame con el que trabajaré
+dataGraphic3 <- dataFormat2021 %>% 
+  group_by(GRUPO.ETARIO,YEAR) %>% 
+  summarise(CANTIDAD = sum(CANTIDAD))
+
+
+## Grafico de Cajas
+dataGraphic3 %>% ggplot(aes(x=GRUPO.ETARIO,y=CANTIDAD)) + geom_boxplot()+
+  theme_classic() +
+  labs(
+    x = "Grupo Etario",
+    y = "Cantidad de Victimas",
+    title = paste(
+      "Cantidad de victimas por grupo Etario en los últimos 3 años"
+    )
+  )
+
+
+##---------------------------------------------------------------------------
+##---------------------------------------------------------------------------
+##Gráfico 4  - Barras Apiladas
 ##Defino DataFrame con el que trabajaré
 dataGraphic4 <- dataFormat %>% 
   group_by(GRUPO.ETARIO,GENERO) %>% 
@@ -172,35 +206,10 @@ dataGraphic4 %>%
 
 
 ##---------------------------------------------------------------------------
-##Gráfico 4  - Cajas
-##Solo en el 2021
-
-##Formateo tabla para mostrar los últimos 3 años, 2019, 2020 y 2021
-dataFormat2021<-dataFormat[dataFormat$YEAR>2018,]
-
-
-##Defino DataFrame con el que trabajaré
-dataGraphic3 <- dataFormat2021 %>% 
-  group_by(GRUPO.ETARIO,YEAR) %>% 
-  summarise(CANTIDAD = sum(CANTIDAD))
-
-
-## Grafico de Cajas
-dataGraphic3 %>% ggplot(aes(x=GRUPO.ETARIO,y=CANTIDAD)) + geom_boxplot()+
-  theme_classic() +
-  labs(
-    x = "Grupo Etario",
-    y = "Cantidad de Victimas",
-    title = paste(
-      "Cantidad de victimas por grupo Etario en los últimos 3 años"
-    )
-  )
-
-
 ##---------------------------------------------------------------------------
-##Gráfico 5  - Dispersion
+##Gráfico 5  - Barras Cruzadas
 
-##Formateo tabla para mostrar solo las mujeres agredidas
+##Formateo tabla para mostrar solo los menores
 dataFormatMenor<-dataFormat[dataFormat$GRUPO.ETARIO=="MENORES",]
 
 ##Defino DataFrame con el que trabajaré
@@ -222,5 +231,7 @@ dataGraphic5<-dataGraphic5[dataGraphic5$ARMAS.MEDIOS!="NO REPORTADO",]
 #dataGraphic5<-head(dataGraphic5)
 
 ggplot(dataGraphic5, aes(x=GENERO, y=CANTIDAD)) + geom_bar(stat="identity", )  + coord_flip() + facet_wrap(~ ARMAS.MEDIOS)
+
+
 
 
