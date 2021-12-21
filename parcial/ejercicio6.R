@@ -143,7 +143,7 @@ dataGraphic4 <- dataFormat %>%
   group_by(GRUPO.ETARIO,GENERO) %>% 
   summarise(CANTIDAD = sum(CANTIDAD))
 
-##Elimino casos no repportados ya que no alteras demasiado los resultados y pueden ser despreciables para el análisis
+##Elimino casos no reportados ya que no alteran demasiado los resultados y pueden ser despreciables para el análisis
 dataGraphic4<-dataGraphic4[dataGraphic4$GENERO!="NO REPORTA",]
 
 
