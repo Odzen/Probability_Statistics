@@ -9,6 +9,9 @@
 ##---------------------------------------------
 ## Last modification: Dic 22
 
+install.packages('pracma')
+library('pracma') #Para funcion strcmp
+
 coin<-c('head', 'tail')
 
 #set.seed(546378)# Semilla para repoducibilidad, ya que es una operacion aleatoria
