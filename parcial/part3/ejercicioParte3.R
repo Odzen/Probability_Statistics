@@ -47,7 +47,7 @@ experimento <- function() {
 ##---------------------------------------------
 
 ##Puede ser cualquier numero de repeticiones
-numeroSimulaciones<-10000
+numeroSimulaciones<-100
 
 #Crear vector vacio donde guardare los lanzamientos
 numSim <- numeric() 
