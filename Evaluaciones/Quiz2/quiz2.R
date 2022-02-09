@@ -11,14 +11,15 @@ binom = function(x,n,p){
 
 binom(3,15,0.4)
 
-## Grafica
-intervaloX= 3:15
-prob=binom(intervaloX,15,0.4)
-
-plot(x,prob,type="h", col="red", lwd=3)
-
 ## Implemetacion con funcion predefinida de R
 dbinom(3,15,0.4) ## p(X=x)
+
+## Grafica
+intervalo4a= 2:15
+prob=binom(intervalo4a,15,0.4)
+
+plot(intervalo4a,prob,type="h", col="red", lwd=3)
+
 
 ##---------------------------------------------------------------------------
 ### Punto 4.B
@@ -37,6 +38,13 @@ answer
 ## Otra forma usando funciones de R
 pbinom(2,15,0.4,lower.tail=F) ## P(x>=3)
 
+##Grafica
+intervalo4c= 0:2
+prob4c=binom(intervalo4c,15,0.4)
+
+plot(intervalo4c,prob4c,type="h", col="red", lwd=3)
+
+
 ##---------------------------------------------------------------------------
 ### Punto 5
 
@@ -50,4 +58,11 @@ poisson(3,0.93)
 
 ## Distribucion de Poisson por default en R
 dpois(3,0.93)
+
+
+## Grafica
+intervaloXPoisson= 0:5
+prob=poisson(intervaloXPoisson,0.93)
+
+plot(intervaloXPoisson,prob,type="h", col="red", lwd=3)
 
