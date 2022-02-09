@@ -1,7 +1,7 @@
 ## Juan Sebastian Velasquez Acevedo - 1744936
 ##---------------------------------------------------------------------------
 ### Punto 4.A
-##Funcion binomial
+## Funcion binomial
 ## P(x=3)
 
 binom = function(x,n,p){
@@ -17,7 +17,7 @@ prob=binom(intervaloX,15,0.4)
 
 plot(x,prob,type="h", col="red", lwd=3)
 
-## Implemetacion con R,ya viene implementado
+## Implemetacion con funcion predefinida de R
 dbinom(3,15,0.4) ## p(X=x)
 
 ##---------------------------------------------------------------------------
@@ -39,6 +39,15 @@ pbinom(2,15,0.4,lower.tail=F) ## P(x>=3)
 
 ##---------------------------------------------------------------------------
 ### Punto 5
-## Distribucion de Poisson
+
+## Funcion poisson
+poisson = function(x,lambda){
+  prob=(exp(-lambda)*((lambda)^(x)))/factorial(x)
+  return(prob)
+}
+
+poisson(3,0.93)
+
+## Distribucion de Poisson por default en R
 dpois(3,0.93)
 
