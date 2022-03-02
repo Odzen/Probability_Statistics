@@ -1,3 +1,7 @@
+## ------------------------------------- 
+# Author: Jan Sebastian Velasquez Acevedo
+# Code:  1744936
+## -------------------------------------
 
 # cargar paquetes
 library(readr)
@@ -75,15 +79,15 @@ hist(error2)
 #-------------------------------------------------------------------------
 # Regresion Lineal Multiple
 # Analizamos en este caso la relación entre la posesión del balón (Ball.Possession)
-# las oportunidades de gol (Attemps) y los goles marcados (Goals.Scored) 
+# las oportunidades de gol (Attemps) y los tiros libres (Free.Kicks) 
 
-modLinealMultiple = lm(data$Attempts ~ data$Ball.Possession..+data$Passes)
+modLinealMultiple = lm(data$Attempts ~ data$Ball.Possession..+data$Free.Kicks)
 modLinealMultiple
 
 
 #Graficos
 plot(data$Ball.Possession..,data$Attempts,
-     main = "Ball Possession vs Attempts",
+     main = "Ball Possession vs Attempts (Considering free kicks)",
      xlab = "Posesión de balón",
      ylab = "Oportunidades de Gol",
      col = "blue")
