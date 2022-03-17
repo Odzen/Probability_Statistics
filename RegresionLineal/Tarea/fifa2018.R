@@ -6,6 +6,7 @@
 # cargar paquetes
 library(readr)
 library(here)
+library(ggplot2)
 
 # Importar csv
 data <-read.csv("FIFA_2018_Statistics.csv")
@@ -99,4 +100,26 @@ summary(modLinealMultiple)
 #Errores residuales
 eMult <- residuals(modLinealMultiple)
 hist(eMult)
+
+
+#------------------
+modLinealtest = lm(data$Goal.Scored ~ data$On.Target)
+modLinealtest
+summary(modLinealtest)
+
+ggplot(data,aes(Distance.Covered..Kms.,Attempts))+geom_point()+stat_smooth()
+
+#REgresion polinomica
+modelLineal3 = lm(data$Attempts ~ data$Distance.Covered..Kms.)
+
+modelLineal4 = lm(data$Attempts ~ log(data$Distance.Covered..Kms.))
+modelPolim = lm(data$Attempts ~ poly(data$Distance.Covered..Kms.,6,raw=TRUE))
+
+modelLineal3
+modelPolim
+
+
+summary(modelLineal4)
+summary(modelLineal3)
+summary(modelPolim)
 
