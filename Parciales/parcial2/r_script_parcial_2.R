@@ -11,7 +11,7 @@
 
 # Grafica de la distribucion normal
 # Rejilla de valores para el eje X
-x <- seq(10, 35, 5)
+x <- seq(10, 35, 1)
 plot(x, dnorm(x, mean = 24, sd = 3.8), type = "o",
      ylim = c(0, 0.125), lwd = 2,lty=3, col = "blue",
      main = "Distribucion normal X∼N(24,3.8)",
