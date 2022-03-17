@@ -60,4 +60,26 @@ prob_procentaje2
 ## El porcentaje de las veces que llegará tarde al trabajo sera de 99.10679%
 ##-------------------------------------------------------------
 
+## c) Si sale de su casa a las 8:35 a.m. y el café se sirve en la oficina de 8:50 a.m. a 9:00 a.m.,
+## ¿cuál es la probabilidad de que se pierda el café?
+
+# La idea es calcular la probabilidad de que el tiempo sea mayor a 
+# 25 minutos. Puesto que 9:00 am - 8:35 am = 25 minutos
+
+# Nos piden P(X > x) = P(X > 25) = 1 - P(X < 25)
+
+# Se calcula primero la Función de distribución acumulada
+distr_acum3 = 1 - pnorm (25,24,3.8)
+distr_acum3
+# Tambien se puede hacer distr_acum = pnorm(25,24,3.8,FALSE)
+
+# Pasandolo a porcentaje
+prob_procentaje3 = distr_acum3*100
+prob_procentaje3
+
+## RESPUESTA: 
+## La probabilidad de que se pierda el cafe es de 0.3962144 con una
+## posibilidad de 39.62144%
+
+##-------------------------------------------------------------
 
