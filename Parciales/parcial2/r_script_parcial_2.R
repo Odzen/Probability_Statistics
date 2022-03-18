@@ -84,15 +84,15 @@ prob_procentaje3
 ##-------------------------------------------------------------
 # d) Calcule la duración mayor en la que se encuentra el 15% de los viajes mas lentos. 
 
-# Para esto se puede usar la funcion de R qnorm dejando el lower.tail=TRUE (default)
+# Para esto se puede usar la funcion de R qnorm dejando el lower.tail=FALSE
 # qnorm es la funcion quantil de la distribucion normal
 
-# Puesto que se quiere encontrar P(X<=x), ya que el procentaje es 
+# Puesto que se quiere encontrar P(X>x), ya que el porcentaje es 
 # 15% entonces queremos encontrar el quantil 0.15
-qnorm(0.15, 24, 3.8)
+qnorm(0.15, 24, 3.8, FALSE)
 
 ## RESPUESTA: 
-#La duracion mayor en la que se encuentran el 15% de los viajes mas lentos es 20.06155
+#La duracion mayor en la que se encuentran el 15% de los viajes mas lentos es 27.93845
 
 ##-------------------------------------------------------------
 # e) Calcule la probabilidad de que 2 de los siguientes 3 viajes tomen al menos 1/2 hora.
