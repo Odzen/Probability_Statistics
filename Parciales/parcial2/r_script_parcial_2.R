@@ -46,7 +46,7 @@ prob_procentaje1
 # 15 minutos. Puesto que 9:00 am - 8:45 am = 15 minutos
 
 # Nos piden P(X > x) = P(X > 15) = 1 - P(X < 15)
-
+ 
 # Se calcula primero la Función de distribución acumulada
 distr_acum2 = 1 - pnorm (15,24,3.8)
 distr_acum2
